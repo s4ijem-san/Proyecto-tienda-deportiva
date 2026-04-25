@@ -32,3 +32,8 @@ function mostrarCarrito() {
 
     document.getElementById("total").textContent = "Total: $" + total;
 }
+
+const auth0Config = {
+    domain:s4ijem-san.us.auth0.com
+    clientId:KBjaRatVNvfeTdZo9PewPOYdvv1U5mhn
+}
