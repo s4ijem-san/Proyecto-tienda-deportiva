@@ -104,9 +104,28 @@
             <button onclick="agregarCarrito('Funda impermeable para mochila', 5000)">Agregar al carrito</button>
         </div>
       </section>
+      
 
+      <!--CARRITO-->
+      <section class="carrito">
+        <h2>Carrito</h2>
+        <ul id="listaCarrito"></ul>
+        <p id="total"></p>
+      </section>
+
+      <!-- FORMULARIO -->
+       <section class="formulario">
+        <h2> Pago </h2>
+        <form id="formPago">
+            <input type="text" id="nombre" placeholder="¿Cuál es su nombre completo?" required>
+            <input type="text" id="dirección" placeholder="¿Cuál es su dirección" required>
+            <input type="email" id="correo" placeholder="¿Cuál es su correo?" required>
+            <input type="tel" id="telefono" placeholder="¿Cuál es su número de teléfono?" required>
+            <button type="submit"> Pagar </button>
+        </form>
+       </section>
+
+<script src="app.js"></script>
 </body>
-
-
 
 </html>
