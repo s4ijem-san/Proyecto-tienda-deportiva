@@ -12,21 +12,36 @@
 
     <!-- Encabezado principal-->
      <header>
+    <!-- IZQUIERDA: LOGO -->
+    <div class="header-left">
+        <img src="img/logo.png" alt="Logo SportyStyle" class="logo">
+    </div>
+
+    <!-- CENTRO: TÍTULO -->
+    <div class="header-center">
         <h1>Store Sporty Style - SSS</h1>
-        <button id="loginBtn"> Iniciar sesión</button> <!-- Botón iniciar sesión-->
-        <button id="logoutBtn" style="display:none;"> Cerrar Sesión</button>
+    </div>
+
+    <!-- DERECHA: LOGIN + CARRITO -->
+    <div class="header-right">
+        <button id="loginBtn">Iniciar sesión</button>
+        <button id="logoutBtn" style="display:none;">Cerrar sesión</button>
         <p id="welcome"></p>
+
         <div class="carrito-icono" onclick="toggleCarrito()">
-     🛒   <span id="contador">0</span>
-</div>
+            🛒 <span id="contador">0</span>
+        </div>
+    </div>
 
-<div id="carritoDesplegable" class="carrito-desplegable">
-    <h3>Tu carrito</h3>
-    <ul id="listaCarrito"></ul>
-    <p id="total"></p>
-</div>
-
-     </header>
+    <!-- CARRITO DESPLEGABLE -->
+    <div id="carritoDesplegable" class="carrito-desplegable">
+        <h3>Tu carrito</h3>
+        <ul id="listaCarrito"></ul>
+        <p id="total"></p>
+        <button onclick="irAPago()">Pagar</button>
+    </div>
+</header>
+<div id="welcomeBanner"></div>
      <!--Sección de los productos-->
      <section class="productos">
         <h2>Poleras Deportivas</h2>
@@ -120,16 +135,31 @@
        <section class="formulario">
         <h2> Pago </h2>
         <form id="formPago">
-            <input type="text" id="nombre" placeholder="¿Cuál es su nombre completo?" required>
-            <input type="text" id="direccion" placeholder="¿Cuál es su dirección" required>
-            <input type="email" id="correo" placeholder="¿Cuál es su correo?" required>
-            <input type="tel" id="telefono" placeholder="¿Cuál es su número de teléfono?" required>
+            <label for="nombre"> Nombre </label>
+            <input type="text" id="nombre" placeholder="Ej: José Mejías" required>
+            <label for="direccion"> Dirección </label>
+            <input type="text" id="direccion" placeholder="Ej: Santa Olga, Constitución, Región del Maule" required>
+            <label for="correo">Correo electrónico </label>
+            <input type="email" id="correo" placeholder="Ej: jmejias@aiep.cl" required>
+            <label for="telefono"> Teléfono </label>
+            <input type="tel" id="telefono" placeholder="Ej: 9 58.. ...." required>
             <button type="submit"> Pagar </button>
         </form>
        </section>
 
-<script src="node_modules/@auth0/auth0-spa-js/dist/auth0-spa-js.production.js" ></script>
+       <div id="modalCompra" class="modal">
+    <div class="modal-contenido">
+        <h2> Compra realizada</h2>
+        <p>Gracias por tu compra, ¡tu pedido está en camino!</p>
+        <button onclick="cerrarModal()">Seguir comprando</button>
+    </div>
+</div>
+
+
+       <script src="node_modules/@auth0/auth0-spa-js/dist/auth0-spa-js.production.js" ></script>
 <script src="app.js" ></script>
+
+
 
 </body>
 

@@ -24,7 +24,10 @@ function mostrarCarrito() {
 
     carrito.forEach(p => {
         let li = document.createElement("li");
-        li.textContent = `${p.nombre} - $${p.precio} x ${p.cantidad}`;
+        li.innerHTML = `
+    ${p.nombre} - $${p.precio} x ${p.cantidad}
+    <button onclick="eliminarProducto('${p.nombre}')">❌</button>
+`;
         lista.appendChild(li);
 
         total += p.precio * p.cantidad;
@@ -68,7 +71,7 @@ if (window.location.search.includes("code=") && window.location.search.includes(
 
     if (isAuthenticated) {
         const user = await auth0Client.getUser();
-        document.getElementById("welcome").textContent = `Bienvenido ${user.name}, un gusto tenerte por aquí, recuerda ejercitarte siempre.`;
+        document.getElementById("welcome").textContent = `Hola, ${user.name} `;
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "inline";
     } else {
@@ -104,12 +107,24 @@ document.getElementById("formPago").addEventListener("submit", function(e){
     return;
 }
 
-    alert("Muchas gracias por tu compra <3");
+    document.getElementById("modalCompra").style.display = "flex";
 
-    sessionStorage.clear();
-    location.reload();
-
+    sessionStorage.removeItem("carrito");
+carrito = [];
+mostrarCarrito();
+document.getElementById("formPago").reset();
+document.querySelector(".modal-contenido p").textContent =
+`Gracias por tu compra. ${total}`;
 });
+
+let total = document.getElementById("total").textContent;
+
+
+function cerrarModal(){
+    document.getElementById("modalCompra").style.display = "none";
+    
+}
+
 
 function toggleCarrito(){
     let carritoDiv = document.getElementById("carritoDesplegable");
@@ -119,3 +134,25 @@ function toggleCarrito(){
         carritoDiv.style.display ="none";
     }
 }
+
+function eliminarProducto(nombre) {
+    let producto = carrito.find(p => p.nombre === nombre);
+
+    if (producto.cantidad > 1) {
+        producto.cantidad--;
+    } else {
+        carrito = carrito.filter(p => p.nombre !== nombre);
+    }
+
+    sessionStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+function irAPago() {
+    document.querySelector(".formulario").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+document.getElementById("welcomeBanner").textContent =
+`Bienvenido ${user.name}, disfruta tu compra`;
