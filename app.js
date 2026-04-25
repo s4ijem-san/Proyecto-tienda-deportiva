@@ -18,6 +18,7 @@ function agregarCarrito(nombre,precio) {
 function mostrarCarrito() {
     let lista = document.getElementById("listaCarrito");
     let total = 0;
+    let contador = 0;
 
     lista.innerHTML="";
 
@@ -27,11 +28,13 @@ function mostrarCarrito() {
         lista.appendChild(li);
 
         total += p.precio * p.cantidad;
+        contador += p.cantidad;
     });
 
     
 
     document.getElementById("total").textContent = "Total: $" + total;
+    document.getElementById("contador").textContent = contador;
 }
 
 // AUTH0 
@@ -107,3 +110,12 @@ document.getElementById("formPago").addEventListener("submit", function(e){
     location.reload();
 
 });
+
+function toggleCarrito(){
+    let carritoDiv = document.getElementById("carritoDesplegable");
+    if (carritoDiv.style.display === "none"){
+        carritoDiv.style.display ="block";
+    } else {
+        carritoDiv.style.display ="none";
+    }
+}

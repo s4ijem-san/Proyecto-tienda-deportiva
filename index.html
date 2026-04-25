@@ -16,6 +16,15 @@
         <button id="loginBtn"> Iniciar sesión</button> <!-- Botón iniciar sesión-->
         <button id="logoutBtn" style="display:none;"> Cerrar Sesión</button>
         <p id="welcome"></p>
+        <div class="carrito-icono" onclick="toggleCarrito()">
+     🛒   <span id="contador">0</span>
+</div>
+
+<div id="carritoDesplegable" class="carrito-desplegable">
+    <h3>Tu carrito</h3>
+    <ul id="listaCarrito"></ul>
+    <p id="total"></p>
+</div>
 
      </header>
      <!--Sección de los productos-->
@@ -106,13 +115,6 @@
         </div>
       </section>
       
-
-      <!--CARRITO-->
-      <section class="carrito">
-        <h2>Carrito</h2>
-        <ul id="listaCarrito"></ul>
-        <p id="total"></p>
-      </section>
 
       <!-- FORMULARIO -->
        <section class="formulario">
