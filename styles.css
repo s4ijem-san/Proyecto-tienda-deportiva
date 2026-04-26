@@ -1,7 +1,7 @@
 body {
     font-family: Arial , Helvetica, sans-serif;
     margin: 0;
-    background: linear-gradient(135deg; #f5f5f5; #ffe0b3);
+    background: linear-gradient(135deg, white, orange);
     
 }
 
@@ -10,7 +10,7 @@ header {
     background-color: orange;
     color: white;
     padding: 15px;
-    
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,11 +60,11 @@ header {
     text-align: center;
 
     box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2;
+    transition: transform 0.2s;
 }
 
-.producto: hover {
-    transform: translateY (-5px);
+.producto:hover {
+    transform: translateY(-5px);
 }
 
 .producto img{
@@ -139,7 +139,7 @@ button {
 #welcomeBanner {
     text-align: center;
     padding: 10px;
-    background: #f5f5f5;
+    background: whitesmoke;
 }
 
 button:hover {
@@ -168,3 +168,4 @@ button:hover {
 
     box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
 }
+
