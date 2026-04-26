@@ -42,11 +42,6 @@ function mostrarCarrito() {
 
 // AUTH0 
 
-const auth0Config = {
-    domain:"s4ijem-san.us.auth0.com",
-    client_id: "KBjaRatVNvfeTdZo9PewPOYdvv1U5mhn"
-};
-
 let auth0Client = null;
 
 window.addEventListener("load",async() =>{
@@ -71,7 +66,9 @@ if (window.location.search.includes("code=") && window.location.search.includes(
 
     if (isAuthenticated) {
         const user = await auth0Client.getUser();
-        document.getElementById("welcome").textContent = `Hola, ${user.name} `;
+        document.getElementById("welcome").textContent = `"No compres mañana lo que puedes comprar hoy."`;
+        document.getElementById("welcomeBanner").textContent = `Bienvenido ${user.name}, disfruta tu compra`;
+
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "inline";
     } else {
@@ -96,8 +93,16 @@ if (window.location.search.includes("code=") && window.location.search.includes(
 
 // Formulario
 
-document.getElementById("formPago").addEventListener("submit", function(e){
+document.getElementById("formPago").addEventListener("submit", async function(e){
     e.preventDefault();
+
+// código que valida login, para que no compren sin estar logueados
+const isAuthenticated = await auth0Client.isAuthenticated();
+
+if (!isAuthenticated){
+    await auth0Client.loginWithRedirect(); // redirigir al login
+    return;
+}
 
     let correo = document.getElementById("correo").value;
     let telefono = document.getElementById("telefono").value;
@@ -106,19 +111,26 @@ document.getElementById("formPago").addEventListener("submit", function(e){
     alert("Teléfono inválido (solo números, 8 a 12 dígitos)");
     return;
 }
+if (carrito.length === 0) {
+    alert("El carrito está vacío");
+    return; }
+
+let totalCompra= 0;
+carrito.forEach(p => {
+    totalCompra += p.precio *p.cantidad;
+});
+
+
+    document.querySelector(".modal-contenido p").textContent = `Gracias por tu compra. Total pagado: $${totalCompra}`;
 
     document.getElementById("modalCompra").style.display = "flex";
 
-    sessionStorage.removeItem("carrito");
+sessionStorage.removeItem("carrito");
 carrito = [];
 mostrarCarrito();
 document.getElementById("formPago").reset();
-document.querySelector(".modal-contenido p").textContent =
-`Gracias por tu compra. ${total}`;
+
 });
-
-let total = document.getElementById("total").textContent;
-
 
 function cerrarModal(){
     document.getElementById("modalCompra").style.display = "none";
@@ -154,5 +166,3 @@ function irAPago() {
     });
 }
 
-document.getElementById("welcomeBanner").textContent =
-`Bienvenido ${user.name}, disfruta tu compra`;
